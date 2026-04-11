@@ -1,6 +1,8 @@
 # Trilium ABCJS
 
-Example of using the [abcjs library](https://docs.abcjs.net/) in Trilium.
+Example of using the [abcjs library](https://docs.abcjs.net/) in Trilium. The following uses the ```abcjs-basic```, which can be found [here](https://docs.abcjs.net/overview/getting-started.html). If you imported both zip files, you could delete one version of the minimised library and clone it.
+
+My js code for the live editor was based on [tje](https://github.com/sottey/tje), mainly because of loading and saving using Trilium api.
 
 ## File Render
 Uses a Render Note to render a html file that includes abc snippets in divs with ```class = 'abc_file'```.
@@ -18,26 +20,27 @@ Uses ```abcjs.Editor``` as per [abcjs docs](https://docs.abcjs.net/interactive/i
 ![live_editor_example.png](./img/live_editor_example.png "live_editor_example.png")
 *Live editor page showing note selection in text area & render*
 
-### Installation & Usage
+## Installation & Usage
 
-#### File Render
+### File Render
 
 * This is simply rendering a html file, which can be anything you want it to be; the js files are the novelty here
 * The imported files will simply give an example of how the rendering works
 * Maybe I'll make a template idk
 * The important thing is to make sure the abc notes are wrapped with ```<div class='abc_file' id='file' style='display: none;'>```
 
-#### Live Editor
+### Live Editor
 
 * Import abcjs_editor.zip into Trilium
 * Create a template note:
     * Render Note pointing to ```abcjs editor``` (html child note of ```abcjs editor - mermaidesque``` (the imported notes)) with a ```#template``` label
     * Create a child note to the template note: this should be a code note (plain text) with label ```abcSave```
+* You can now create new notes with the template
 
 ![live_editor_template_annotated.png](./img/live_editor_template_annotated.png)
 *Visualisation of the notes required*
 
-#### As An 'Include Note'
+### As An 'Include Note'
 
 An option is to include the rendered notes into text notes. This works using the file render method but not the live editor.
 
@@ -54,3 +57,4 @@ An option is to include the rendered notes into text notes. This works using the
 - [ ] with the plugin and/or the simple file render, abcjs inserts ```.abcjs-dragging-in-progress text, .abcjs-dragging-in-progress tspan {-webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}Sheet Music``` <- figure out how to fix that
     - [ ] maybe related to [this issue](https://github.com/paulrosen/abcjs/issues/717)?
 - [ ] fix live editor as include note not rendering properly
+- [ ] dragging works; maybe when notes dragged, the textarea value is changed?
