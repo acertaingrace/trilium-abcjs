@@ -1,0 +1,41 @@
+<div class='flex'>
+<div><textarea id="abc" cols="50">
+%%text loading...
+</textarea></div>
+<div id="paper"></div>
+</div>
+
+<div id="savepanel"> 
+    <div id="savediv"><button id="saveButton" type="button">Save</button></div>
+    <div id="warndiv"><b>Render warnings:</b><div id="warnings"></div></div>
+</div>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~ CSS ~~~~~~~~~~~~~~~~~~~~~~~ -->
+<style>
+.flex {
+    display: flex;
+    width: 90%;
+}
+.flex > div {
+    width: 50%;
+}
+#abc{
+    height: 70vh;
+}
+#savepanel {
+    display: flex;
+    position: sticky;
+    bottom: 0;
+    background: #2e3440;
+}
+#savediv {
+    margin-right: 10vw;
+}
+#warndiv {
+    width: 100%;
+}
+#warnings {
+    overflow-y: auto;
+    max-height: 15vh;
+}
+</style>
