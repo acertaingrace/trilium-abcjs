@@ -2,8 +2,6 @@
 
 Example of using the [abcjs library](https://docs.abcjs.net/) in Trilium. The following uses the ```abcjs-basic```, which can be found [here](https://docs.abcjs.net/overview/getting-started.html). If you imported both zip files, you could delete one version of the minimised library and clone it.
 
-My js code for the live editor was based on [tje](https://github.com/sottey/tje), mainly because of loading and saving using Trilium api.
-
 ## File Render
 Uses a Render Note to render a html file that includes abc snippets in divs with ```class = 'abc_file'```.
 
@@ -17,8 +15,18 @@ Uses a Render Note to display the live editor. Can save to a text file.
 
 Uses ```abcjs.Editor``` as per [abcjs docs](https://docs.abcjs.net/interactive/interactive-editor.html).
 
+My js code for the live editor was based on [tje](https://github.com/sottey/tje), mainly because of loading and saving using Trilium api.
+
 ![live_editor_example.png](./img/live_editor_example.png "live_editor_example.png")
 *Live editor page showing note selection in text area & render*
+
+## SVG Editor
+Adapted the [trilium-drawio](https://github.com/SiriusXT/trilium-drawio) plugin to live edit a svg file, which can then be referenced in a text note. Saves to a text file. Mostly done because the live editor had issues when used as an include note (which is because I was using a render note as a template which points to the same one html note).
+
+Uses the live editor above as an overlay.
+
+![svg editor](./img/svg_editor.gif)
+*Click the svg image to access live editor which saves to the svg image & a text file*
 
 ## Installation & Usage
 
@@ -34,7 +42,7 @@ Uses ```abcjs.Editor``` as per [abcjs docs](https://docs.abcjs.net/interactive/i
 * Import abcjs_editor.zip into Trilium
 * Create a template note:
     * Render Note pointing to ```abcjs editor``` (html child note of ```abcjs editor - mermaidesque``` (the imported notes)) with a ```#template``` label
-    * Create a child note to the template note: this should be a code note (plain text) with label ```abcSave```
+    * Create a child note to the template note: this should be a code note (plain text) with label ```#abcSave```
 * You can now create new notes with the template
 
 ![live_editor_template_annotated.png](./img/live_editor_template_annotated.png)
@@ -50,6 +58,28 @@ An option is to include the rendered notes into text notes. This works using the
 ![include_live_ed.png](./img/include_live_ed.png)
 *Live editor as an include note; uses the default textarea value instead of the savefile*
 
+### SVG Editor
+* Import abcjs_svg_editor.zip into Trilium
+* svg_editor.js (or drawio-esque) should be labelled ```#widget```
+* abcjs.svg should be labelled ```#template``` and ```#originalFileName=abcjs.svg```
+* save.abc should have ```#abcSave```
+* If you are also using trilium-drawio, you need to edit drawio.js to prevent conflicts
+
+```javascript
+if (note.mime != "image/svg+xml" || id_svg_dict[noteId].indexOf("mxfile") < 0) { return; }
+
+// add the below line to limit trilium-drawio to that particular template file
+if (!(note.hasLabel("originalFileName")) || note.getLabel("originalFileName").value != "drawio.svg"){return;}
+// ^^^ add above line to only use drawio svg files ^^^
+
+// alternatively, use below to exclude abcjs svg files from being targeted by trilium-drawio
+if (!(note.hasLabel("originalFileName")) || note.getLabel("originalFileName").value == "abcjs.svg"){return;}
+// ^^^ add above line to exclude abcjs svg files ^^^
+
+setTimeout(function () {
+    if ($("div.component.note-split:not(.hidden-ext) .note-detail-image-wrapper div.iframe-drawio").length > 0) { return; };//When switching tabs, if the iframe is already loaded, return
+```
+
 ## To Do:
 - [ ] make editor prettier
     - [ ] use ```div contenteditable=true``` instead of ```textarea``` to allow for syntax highlighting with highlight.js
@@ -58,3 +88,6 @@ An option is to include the rendered notes into text notes. This works using the
     - [ ] maybe related to [this issue](https://github.com/paulrosen/abcjs/issues/717)?
 - [ ] fix live editor as include note not rendering properly
 - [ ] dragging works; maybe when notes dragged, the textarea value is changed?
+- [ ] refactor code
+
+Lmao, with this amount of issues, I should just use Github's issues tracker.
