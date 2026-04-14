@@ -1,5 +1,5 @@
 // import library
-const abcjs = require('abcjs_basic.js')
+const abcjs = require('abcjs_basic.js');
 
 // global variables
 const saveButton = document.getElementById("saveButton");
@@ -7,9 +7,9 @@ const textArea = document.getElementById("abc");
 const saveFile = await getAbcSave();
 
 // main statements
-textareaFromFile();
+await textareaFromFile();
 saveButton.addEventListener("click", clickSave);
-console.log("Out: " + textArea.value);
+
 // use abcjs's Editor
 const editor = new abcjs.Editor("abc", { 
     canvas_id: "paper", 
@@ -19,6 +19,7 @@ const editor = new abcjs.Editor("abc", {
         /*paddingbottom: 30*/
     }
 });
+editor.fireChanged();
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 Event handler for clicking save button
@@ -38,10 +39,6 @@ async function textareaFromFile(){
 
     // display content in textarea
     textArea.value = saveData;
-
-    editor.fireChanged();
-
-    console.log("In function: " + textArea.value);
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -50,5 +47,7 @@ Returns: FNote
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 async function getAbcSave(){
     // search for save file
-    const searchString = "#abcSave AND note.parents.noteId = '" + api.getActiveContextNote().noteId + "'";
-    return api.searchForNote(searchString);}
+    const searchString = "#abcSave AND note.parents.noteId = '" + api.originEntity.noteId + "'";
+
+    return api.searchForNote(searchString);
+}
