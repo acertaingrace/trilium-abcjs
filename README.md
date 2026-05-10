@@ -88,20 +88,5 @@ setTimeout(function () {
     * I think it can be overridden by css ([x](https://docs.abcjs.net/visual/render-abc-options.html#foregroundcolor)) but I haven't tried it
     * Or just set the colour in the js script
 
-## To Do:
-- [ ] make editor prettier
-    - [ ] use ```div contenteditable=true``` instead of ```textarea``` to allow for syntax highlighting with highlight.js
-- [ ] widget to create a note based on one of the abcjs templates and insert as an 'Include Note' in Text notes
-    - [ ] running into a problem with render notes as a template as they point to the same html file
-        - ![snippet_render_error.png](./img/snippet_render_error.png)
-            - Only one note can render at a time
-        - [ ] using different html files would require linking to the js scripts somehow without being child notes (as that would be unwieldy)
-    - [ ] fix live editor as include note not rendering properly unless trilium is reloaded
-- [ ] with the plugin and/or the simple file render, abcjs inserts ```.abcjs-dragging-in-progress text, .abcjs-dragging-in-progress tspan {-webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}Sheet Music``` into the html file, which is meant to be the style tag for the svg
-- [ ] dragging works; maybe when notes dragged, the textarea value is changed?
-- [ ] refactor code
-    - [ ] svg editor code
-    - [ ] make code more modular to share functions between the different features
-- [ ] fix svg editor behaviour when switching tabs while editor is still open
-
-Lmao, with this amount of issues, I should just use Github's issues tracker.
+## TODO:
+*\[Migrated to GitHub issue tracker\]*
