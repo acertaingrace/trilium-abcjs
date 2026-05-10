@@ -17,6 +17,8 @@ Uses ```abcjs.Editor``` as per [abcjs docs](https://docs.abcjs.net/interactive/i
 
 My js code for the live editor was based on [tje](https://github.com/sottey/tje), mainly because of loading and saving using Trilium api.
 
+Highlightjs integration using ['fake highlighting'](https://codersblock.com/blog/highlight-text-inside-a-textarea/), [highlightjs](https://highlightjs.org/), and [highlightjs-abc](https://github.com/nocpiun/highlightjs-abc).
+
 ![live_editor_example.png](./img/live_editor_example.png "live_editor_example.png")
 *Live editor page showing note selection in text area & render*
 
