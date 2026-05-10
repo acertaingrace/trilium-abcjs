@@ -1,8 +1,11 @@
 <div class='flex'>
-<div><textarea id="abc" cols="50">
-%%text loading...
-</textarea></div>
-<div id="paper"></div>
+    <div id='overlay'>
+        <pre><code id='abc'>
+        %%text loading...
+        </code></pre>
+        <textarea style='display: block' id='invisibleText'>%%text loading</textarea>
+    </div>
+    <div id="paper"></div>
 </div>
 
 <div id="savepanel"> 
@@ -16,11 +19,42 @@
     display: flex;
     width: 90%;
 }
-.flex > div {
-    width: 50%;
+#paper {
+    flex-grow: 2;
+    flex-basis: 50%;
 }
 #abc{
     height: 70vh;
+    overflow-y: auto;
+}
+#overlay {
+    position: relative;
+}
+textarea {
+    z-index: 2;
+    inset: 0 0 auto;
+    position: absolute;
+    
+    margin: 1em !important;
+    padding: 1em;
+    border: 0;
+    
+    height: 70vh;
+    width: auto;
+    resize: none;
+    overflow-y: auto;
+    
+    background-color: transparent;
+    font-size: .9em;
+    font-family: var(--monospace-font-family);
+    color: transparent;
+}
+#invisibleText::selection {
+    background: red;
+    color: white;
+}
+pre code {
+    font-size: .9em;
 }
 #savepanel {
     display: flex;
